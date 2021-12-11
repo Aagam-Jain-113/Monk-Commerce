@@ -38,7 +38,7 @@ justify-content: center;
 `
 
 const Card = styled.div`
-border: ${props => props.selected ? "2px solid #F53838" : "2px solid #DDDDDD"};
+/* border: ${props => props.activeAccordion === null ? "2px solid #F53838" : "2px solid #DDDDDD"}; */
 border-radius: 10px;
 height: 760px;
 text-align: center;
@@ -91,7 +91,6 @@ color: #0B132A;
 `
 
 const Select = styled.div`
-color: ${props => props.selected ? "#FFF" : "#F53838"};
 width: 180px;
 height: 45px;
 display: flex;
@@ -99,10 +98,8 @@ align-items: center;
 justify-content: center;
 margin-top: 20px;
 border-radius: 50px;
-background: ${props => props.selected ? "#F53838" : "#FFF"};
 font-weight: 700;
 border: 2px solid #F53838;
-box-shadow: ${props=>props.selected ? "0 20px 54px rgba(245, 56, 56, 0.35)" : ""};
 cursor: pointer;
 
 &:hover{
@@ -112,44 +109,53 @@ cursor: pointer;
 }
 `
 
-const plan_data = [
-    {
-        title: "Free Plan",
-        image: Free,
-        benefits: ["Unlimited Bandwith", "Encrypted Connection", "No Traffic Logs", "Works on All Devices"],
-        price: "Free",
-        select: false,
-    },
-    {
-        title: "Standard Plan",
-        image: Standard,
-        benefits: ["Unlimited Bandwith", "Encrypted Connection", "Yes Traffic Logs", "Works on All Devices", "Connect Anyware"],
-        price: "$9",
-        select: false,
-    },
-    {
-        title: "Premium Plan",
-        image: Premium,
-        benefits: ["Unlimited Bandwith", "Encrypted Connection", "Yes Traffic Logs", "Works on All Devices", "Connect Anyware", "Get New Features"],
-        price: "$12",
-        select: true,
-    },
-
-]
-
 function Plan() {
+    const [activeAccordion, setActiveAccordion] = React.useState(2);
+
+    const handleClick = (index) => {
+        if (index === activeAccordion) {
+            setActiveAccordion(null);
+        } else {
+            setActiveAccordion(index);
+        }
+    }
+
+    const plan_data = [
+        {
+            id: 1,
+            title: "Free Plan",
+            image: Free,
+            benefits: ["Unlimited Bandwith", "Encrypted Connection", "No Traffic Logs", "Works on All Devices"],
+            price: "Free",
+        },
+        {
+            id: 2,
+            title: "Standard Plan",
+            image: Standard,
+            benefits: ["Unlimited Bandwith", "Encrypted Connection", "Yes Traffic Logs", "Works on All Devices", "Connect Anyware"],
+            price: "$9",
+        },
+        {
+            id: 3,
+            title: "Premium Plan",
+            image: Premium,
+            benefits: ["Unlimited Bandwith", "Encrypted Connection", "Yes Traffic Logs", "Works on All Devices", "Connect Anyware", "Get New Features"],
+            price: "$12",
+        },
+    ]
+
     return (
-        <div style={{margin: "100px 0px"}}>
+        <div style={{ margin: "100px 0px" }}>
             <PlanTitle>Choose Your Plan</PlanTitle>
             <Subtitle>Let's choose the package that is best for you and explore it happily and cheerfully.</Subtitle>
             <Grid>
-                {plan_data.map((plan,index) => {
+                {plan_data.map((plan, index) => {
                     return (
-                        <Card selected={plan.select} key={index}>
+                        <Card style={activeAccordion === index ? { border: "2px solid #F53838" } : { border: "2px solid #DDDDDD" }} onClick={() => handleClick(index)} key={index}>
                             <img src={plan.image} alt="Surprise Box" />
                             <Datatitle><Bold>{plan.title}</Bold></Datatitle>
                             <div style={{ height: "350px" }}>
-                                {plan.benefits.map((name,index) => {
+                                {plan.benefits.map((name, index) => {
                                     return (
                                         <Flex key={index}>
                                             <Tick>&#x2714;</Tick>
@@ -159,8 +165,8 @@ function Plan() {
                                 })}
                             </div>
                             {plan.price === "Free" ? <Price><Bold>{plan.price}</Bold></Price> : <Price><Bold>{plan.price}</Bold> / mo</Price>}
-                            <div style={{display: "flex",width: "100%", justifyContent: "center"}}>
-                                <Select selected={plan.select}>Select</Select>
+                            <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+                                <Select style={activeAccordion === index ? { color: "#FFF", background: "#F53838", boxShadow: "0 20px 54px rgba(245, 56, 56, 0.35)"} : {color: "#F53838", background: "#FFF", boxShadow:""}} onClick={() => handleClick(index)}>Select</Select>
                             </div>
                         </Card>
                     )
