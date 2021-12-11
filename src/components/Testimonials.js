@@ -14,6 +14,11 @@ width: 450px;
 text-align: center;
 display: block;
 margin: 0 auto;
+@media (max-width: 768px){
+    width: 100%;
+    font-size: 24px;
+    line-height: 36px;
+}
 `
 
 const SubHeading = styled.div`
@@ -23,10 +28,18 @@ line-height: 30px;
 text-align: center;
 display: block;
 margin: 20px auto;
+@media (max-width: 768px){
+    width: 100%;
+    font-size: 14px;
+    margin: 10px auto;
+}
 `
 
 const TestimonialCarousel = styled.div`
 padding-left: 7rem;
+@media (max-width: 768px){
+    padding: 0 0.5rem;
+}
 `
 
 const Flex = styled.div`
@@ -65,6 +78,11 @@ const Left = styled.span`
     border-radius: 50%;
     height: 60px;
     width: 60px;
+    @media (max-width: 1024px){
+        height: 40px;
+        width: 40px;
+        left: 70%;
+    }
 `
 
 const Right = styled.span`
@@ -84,6 +102,28 @@ const Right = styled.span`
     border-radius: 50%;
     height: 60px;
     width: 60px;
+    @media (max-width: 1024px){
+        height: 40px;
+        width: 40px;
+        right: 7%;
+    }
+`
+
+const SingleDot = styled.span`
+    display: flex;
+    width: 100%;
+    margin-top: 40px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 15px;
+    width: ${props=> props.isActive ? "30px" : "15px"};
+    border-radius: 16px;
+    background: ${props=> props.isActive ? "#F53838" : "#DDE0E4"};
+    @media (max-width: 800px){
+        width: ${props=> props.isActive ? "16px" : "10px"};
+        height: 16px;
+        border-radius: 50%;
+    }
 `
 
 const arrowLeft = () => (
@@ -98,28 +138,38 @@ const arrowRight = () => (
     </Right>
 )
 const MyDot = ({ isActive }) => (
-    <span
-        style={{
-            display: 'flex',
-            wdith: "100%",
-            marginTop: "40px",
-            justifyContent: "flex-end",
-            height: '15px',
-            width: isActive ? '30px' : '15px',
-            borderRadius: '16px',
-            background: isActive ? '#F53838' : "#DDE0E4"
-        }}
-    ></span>
+    <SingleDot isActive={isActive} />
 )
+
+const layouts = [
+    {
+        breakpoint: 800,
+        cols: 2,
+        rows: 1,
+        gap: 10,
+        loop: true,
+        showDots: true,
+        dot: MyDot,
+    },
+    {
+        breakpoint: 600,
+        cols: 1,
+        rows: 1,
+        gap: 10,
+        loop: true,
+        showDots: true,
+        dot: MyDot,
+    },
+]
 
 
 function Testimonials() {
     return (
-        <div style={{ padding: "300px 0 90px 0" }}>
+        <div style={{ padding: "0 0 150px 0" }}>
             <Heading>Trusted by Thousands of Happy Customer</Heading>
             <SubHeading>These are the stories of our customers who have joined us with great pleasure when using this crazy feature.</SubHeading>
             <TestimonialCarousel>
-                <Carousel cols={3} mobileBreakpoint={767} arrowLeft={arrowLeft} arrowRight={arrowRight} scrollSnap={true} rows={1} gap={20} loop showDots={true} dot={MyDot}>
+                <Carousel cols={3} responsiveLayout={layouts} mobileBreakpoint={400} arrowLeft={arrowLeft} arrowRight={arrowRight} rows={1} gap={20} loop showDots={true} dot={MyDot}>
                     <Carousel.Item>
                         <TestCard>
                             <Flex>

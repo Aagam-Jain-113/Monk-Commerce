@@ -19,6 +19,9 @@ margin-top: 10px;
 display: block;
 margin: 10px auto;
 width: 555px;
+@media (max-width: 768px){
+    width: 100%;
+}
 `
 
 const Grid = styled.div`
@@ -29,10 +32,9 @@ align-items: center;
 gap: 1rem;
 position: relative;
 width: 100%;
-padding: 2rem 0;
+padding: 2rem 0 0 0;
 align-items: center;
 justify-content: center;
-height: 80vh;
 `
 
 const Card = styled.div`
@@ -40,6 +42,8 @@ border: ${props => props.selected ? "2px solid #F53838" : "2px solid #DDDDDD"};
 border-radius: 10px;
 height: 760px;
 text-align: center;
+display: block;
+margin: 0 auto;
 padding-top: 100px;
 width: 330px;
 background: #fff;

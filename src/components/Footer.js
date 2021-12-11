@@ -6,12 +6,18 @@ import Logo from '../assets/logo.png'
 const Flex = styled.div`
 display: flex;
 align-items: center;
+@media (max-width: 768px){
+justify-content: center;
+}
 `
 
 const Title = styled.p`
 font-size: 20px;
 margin-left: 10px;
 font-weight: 500;
+@media (max-width: 768px){
+text-align: center;
+}
 `
 
 const Bold = styled.span`
@@ -21,6 +27,12 @@ font-weight: 500;
 const FooterContainer = styled.div`
 padding: 4rem 8rem;
 display: flex;
+@media (max-width: 768px){
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    padding: 2rem;
+}
 `
 
 const Description = styled.p`
@@ -28,6 +40,9 @@ color: #4F5665;
 margin-top: 20px;
 line-height: 30px;
 width: 70%;
+@media (max-width: 768px){
+width: 100%;
+}
 `
 
 const Copyright = styled.p`
@@ -37,13 +52,34 @@ margin-top: 20px;
 
 const Col1 = styled.div`
 width: 45%;
+@media (max-width: 768px){
+    width: 100%;
+    text-align: center;
+}
 `
 
 const Col2 = styled.div`
 width: 20%;
+@media (max-width: 768px){
+    width: 100%;
+    text-align: center;
+}
 `
 const Col3 = styled.div`
 width: 20%;
+@media (max-width: 768px){
+    width: 100%;
+    text-align: center;
+}
+`
+
+const Col4 = styled.div`
+display: block;
+margin-left: auto;
+@media (max-width: 768px){
+    width: 100%;
+    text-align: center;
+}
 `
 
 const Heading = styled.p`
@@ -52,6 +88,10 @@ color: #0B132A;
 font-size: 18px;
 line-height: 30px;
 margin-bottom: 20px;
+@media (max-width: 768px){
+    margin-bottom: 0px;
+    margin-top: 30px;
+}
 `
 
 const List = styled.ul`
@@ -94,13 +134,13 @@ function Footer() {
                         <li>Terms of Service</li>
                     </List>
                 </Col3>
-                <div style={{float: "right", display: "block", marginLeft: "auto"}}>
+                <Col4>
                     <Heading>Earn Money</Heading>
                     <List>
                         <li>Affiliate</li>
                         <li>Become Partner</li>
                     </List>
-                </div>
+                </Col4>
             </FooterContainer>
         </div>
     )
